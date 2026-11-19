@@ -79,9 +79,13 @@ These are fully automated workflows for setting up new SAP HANA environments fro
 6.  `5_storagepool_create.yml`: Creates two separate HDP storage pools.
 7.  `6_vvol_creation_in_pool.yml`: Creates Virtual Volumes in respective pools and maps LUNs.
 
+---
+
 ### 1.5. Virtual SAP HANA (vHANA) Scale-Up (VSP One Block Storage)
 **Directory:** `sap-vhana-scale-up-vsp-one`
+
 **Version:** v1.0
+
 **Description:** Automated VSP One Block storage provisioning for a vHANA scale-up host (ESXi, SAN boot) using a single DDP pool. Two main playbooks: `vhana_main_direct.yml` for direct FC (validated) and `vhana_main_switch.yml` for FC switch (not validated on the reference testbed).
 
 **Workflow (direct FC):**
@@ -94,6 +98,7 @@ These are fully automated workflows for setting up new SAP HANA environments fro
 * `6_vsp1_volume_creation_mapping_direct.yml`: Creates the ESXi OS, OS, shared, log and data volumes and maps them to LUNs 0-10.
 
 See the folder README for the LUN layout and direct FC notes.
+
 ---
 
 ## 2. Individual Task Playbooks
