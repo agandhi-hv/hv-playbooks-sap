@@ -116,7 +116,7 @@ This folder contains standalone playbooks for performing specific, granular task
 **Configuration:** Use `vsp_direct_variables_modify.yml` to specify targets.
 
 ### 2.2. Deletion Playbooks
-**⚠️ WARNING:** These playbooks perform destructive actions. Use with caution.
+** WARNING:** These playbooks perform destructive actions. Use with caution.
 | Playbook File | Summary |
 | :--- | :--- |
 | `delete_all_existing_hostgroups.yml` | Deletes ALL custom hostgroups from the storage system after unpresenting all associated LDEVs. |
