@@ -1,0 +1,51 @@
+---
+###################################################################################
+# Hitachi Storage Provisioning Playbooks for SAP HANA
+# Author: Hitachi Vantara SAP Engineering Team
+# Version: v1.0
+# Date: November 2025
+# Description: Automated storage provisioning and management for Virtual SAP HANA (vHANA) Scale-Up
+# Servers using Single DDP Storage pool method for VSP One B Series Block Storage
+# Tested on: Hitachi Virtual Storage Platform One Block Storage Modules for 
+# Red Hat Ansible 4.4.2
+####################################################################################
+
+##########################################################################################
+##  main.yml to create & configure VSP One Block storage for vHANA Scale-up Servers (direct FC)
+##########################################################################################
+- name: Configure VSP One Block Storage for Virtual SAP HANA Scale-up direct connection environment
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Starting SAP HANA Storage Configuration Pipeline for DIRECT Connection
+      ansible.builtin.debug:
+        msg:
+           - "========================================================================="
+           - "VSP One Block Configuration for Virtualize SAP HANA Scale-up Environment"
+           - "========================================================================="
+           - "Prerequisites Check:"
+           - "  ✓ Verify nodes_info.csv contains: hostnames, WWNs, storage ports"
+           - "  ✓ Confirm vault file has: storage address and credentials"
+           - "Starting automated provisioning workflow..."
+
+
+- name: Check and validate VSP One Block Storage System, if Storage not supported then pipe-line will exit
+  import_playbook: 0_storagesystem_validate.yml
+
+- name: Check and validate required free Disk Drives in VSP One
+  import_playbook: 1_disk_drives_fact.yml
+
+- name: Create DDP Pool for HANA volumes
+  import_playbook: 2_ddp_pool_create.yml
+  
+- name: Load SAP HANA Nodes details from CSV
+  import_playbook: 3_load_nodes.yml
+
+- name: Configure VSP One Storage Ports for servers in CSV file
+  import_playbook: 4_storage_port_create.yml
+
+- name: Configure Hostgroup in VSP One Storage for direct connected servers
+  import_playbook: 5_hostgroup_create_direct.yml
+
+- name: Create all required Volumes in DDP Pool for SAP HANA Servers and attach to Server profile in specific order
+  import_playbook: 6_vsp1_volume_creation_mapping_direct.yml
