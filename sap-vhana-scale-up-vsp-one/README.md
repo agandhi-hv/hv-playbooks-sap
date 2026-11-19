@@ -47,9 +47,11 @@ Tested on: hitachivantara.vspone_block 4.4.2, ansible-core 2.16.14, Python 3.9.1
 - The volume playbook stops on the first error. Do not rerun it against existing volumes without checking first.
 - To re-format the boot LUN, power off the host, then run on the storage CLI:
 
-    raidcom modify ldev -ldev_id 0 -status blk
-    raidcom initialize ldev -ldev_id 0 -operation fmt
-    raidcom add lun -port CL1-A -lun_id 0 -ldev_id 0
-    raidcom add lun -port CL2-A -lun_id 0 -ldev_id 0
+```
+raidcom modify ldev -ldev_id 0 -status blk
+raidcom initialize ldev -ldev_id 0 -operation fmt
+raidcom add lun -port CL1-A -lun_id 0 -ldev_id 0
+raidcom add lun -port CL2-A -lun_id 0 -ldev_id 0
+```
 
   Wait until FMT_STS shows - before re-adding the LUNs.
